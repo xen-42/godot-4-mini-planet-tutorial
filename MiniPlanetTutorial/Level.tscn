@@ -64,7 +64,7 @@ _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 150.0
 surfaceRadius = 20.0
 _surfaceGravity = 9.8
-_dayLength = 24.0
+_dayLength = 120.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Earth"]
 mesh = SubResource("SphereMesh_v6gf0")
@@ -125,3 +125,4 @@ far = 40000.0
 environment = SubResource("Environment_ocf52")
 
 [node name="Player" parent="." instance=ExtResource("5_jloqv")]
+_autoOrientSpeed = 2.0
