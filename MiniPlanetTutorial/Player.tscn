@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://lcwor5vc0x1h"]
+[gd_scene load_steps=4 format=3 uid="uid://dh7elcep04tt2"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_1sbp3"]
 
@@ -23,6 +23,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.678147, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D"]
+spot_range = 60.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_oioec")
