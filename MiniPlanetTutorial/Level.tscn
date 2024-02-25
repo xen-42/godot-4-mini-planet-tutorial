@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxjkkgh0jfjm"]
+[gd_scene load_steps=18 format=3 uid="uid://bxjkkgh0jfjm"]
 
 [ext_resource type="Texture2D" uid="uid://6eqctxd7t77y" path="res://moon_texturemap.png" id="1_7111j"]
 [ext_resource type="Script" path="res://SolarSystem.cs" id="1_s2k7g"]
 [ext_resource type="Texture2D" uid="uid://blkyamearklx8" path="res://mars_texturemap.png" id="2_iucsa"]
 [ext_resource type="Script" path="res://Planet.cs" id="2_ltn17"]
+[ext_resource type="PackedScene" uid="uid://lcwor5vc0x1h" path="res://Player.tscn" id="5_jloqv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o3kyp"]
 load_path = "res://.godot/imported/earth_texturemap.png-44547dae1d3f4c0d309b13b6a5240d82.s3tc.ctex"
@@ -122,3 +123,5 @@ far = 40000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ocf52")
+
+[node name="Player" parent="." instance=ExtResource("5_jloqv")]
