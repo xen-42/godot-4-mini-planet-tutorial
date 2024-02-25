@@ -13,6 +13,8 @@ public partial class Player : RigidBody3D
 	private Vector2 _mouseDelta;
 	private float _cameraXRotation;
 
+	[Export] private float _thrust = 1f;
+
 	private bool _inMap;
 
 	public override void _Ready()
@@ -51,7 +53,21 @@ public partial class Player : RigidBody3D
 
 	private void ProcessMovementInputs(double delta)
 	{
+		var movement = Vector3.Zero;
 
+		var forward = -GlobalTransform.Basis.Z;
+		var left = -GlobalTransform.Basis.X;
+		var up = GlobalTransform.Basis.Y;
+
+		if (Input.IsActionPressed("Forward")) movement += forward;
+		if (Input.IsActionPressed("Backward")) movement -= forward;
+		if (Input.IsActionPressed("Left")) movement += left;
+		if (Input.IsActionPressed("Right")) movement -= left;
+		if (Input.IsActionPressed("Up")) movement += up;
+		if (Input.IsActionPressed("Down")) movement -= up;
+		movement = movement.Normalized();
+
+		ApplyCentralForce(_thrust * movement);
 	}
 
 	private void ProcessLookInputs(double delta)
@@ -62,7 +78,7 @@ public partial class Player : RigidBody3D
 
 		if (Input.IsActionPressed("Rotate"))
 		{
-			Rotate(_cameraPivot.GlobalTransform.Basis.Column2, Mathf.DegToRad(deltaY));
+			Rotate(_cameraPivot.GlobalTransform.Basis.Z, Mathf.DegToRad(deltaY));
 		}
 		else
 		{

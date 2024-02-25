@@ -23,7 +23,7 @@ public partial class Planet : StaticBody3D
 	/// Walkable surface, used to calculate gravity
 	/// </summary>
 	[ExportCategory("Gravity")]
-	[Export] private float _surfaceRadius;
+	[Export] public float surfaceRadius;
 
 	/// <summary>
 	/// Gravity felt at _surfaceRadius in m/s^2
@@ -58,7 +58,7 @@ public partial class Planet : StaticBody3D
 		// a = G m2 / d^2
 		// _surfaceGravity = G m2 / _surfaceRadius^2
 		// G m2 = _surfaceGravity * _surfaceRadius^2
-		GravitationalMass = _surfaceGravity * _surfaceRadius * _surfaceRadius;
+		GravitationalMass = _surfaceGravity * surfaceRadius * surfaceRadius;
 	}
 
 	public void Init()

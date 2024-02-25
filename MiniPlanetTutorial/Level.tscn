@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bxjkkgh0jfjm"]
+[gd_scene load_steps=17 format=3 uid="uid://bxjkkgh0jfjm"]
 
 [ext_resource type="Texture2D" uid="uid://6eqctxd7t77y" path="res://moon_texturemap.png" id="1_7111j"]
 [ext_resource type="Script" path="res://SolarSystem.cs" id="1_s2k7g"]
 [ext_resource type="Texture2D" uid="uid://blkyamearklx8" path="res://mars_texturemap.png" id="2_iucsa"]
 [ext_resource type="Script" path="res://Planet.cs" id="2_ltn17"]
-[ext_resource type="PackedScene" uid="uid://lcwor5vc0x1h" path="res://Player.tscn" id="5_jloqv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o3kyp"]
 load_path = "res://.godot/imported/earth_texturemap.png-44547dae1d3f4c0d309b13b6a5240d82.s3tc.ctex"
@@ -62,7 +61,6 @@ planets = [NodePath("Earth"), NodePath("Mars"), NodePath("Sun"), NodePath("Moon"
 script = ExtResource("2_ltn17")
 _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 150.0
-_surfaceRadius = 20.0
 _surfaceGravity = 9.8
 _dayLength = 24.0
 
@@ -77,7 +75,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9029, 0, 0)
 script = ExtResource("2_ltn17")
 _orbitalParent = NodePath("../Earth")
 _orbitalRadius = 70.0
-_surfaceRadius = 10.0
 _surfaceGravity = 2.0
 _tidallyLocked = true
 
@@ -93,7 +90,6 @@ script = ExtResource("2_ltn17")
 _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 300.0
 _orbitalAngle = 45.0
-_surfaceRadius = 20.0
 _surfaceGravity = 5.0
 _dayLength = 34.0
 
@@ -106,7 +102,6 @@ shape = SubResource("SphereShape3D_btiol")
 [node name="Sun" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 170.046)
 script = ExtResource("2_ltn17")
-_surfaceRadius = 50.0
 _surfaceGravity = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sun"]
@@ -123,5 +118,3 @@ far = 40000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ocf52")
-
-[node name="Player" parent="." instance=ExtResource("5_jloqv")]

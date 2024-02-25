@@ -7,9 +7,13 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oioec"]
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("_camera", "_cameraPivot")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource("1_1sbp3")
 _camera = NodePath("CameraPivot/Camera3D")
 _cameraPivot = NodePath("CameraPivot")
+_thrust = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_myfdv")
