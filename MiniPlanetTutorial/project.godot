@@ -22,3 +22,10 @@ project/assembly_name="MiniPlanetTutorial"
 [editor]
 
 naming/scene_name_casing=1
+
+[physics]
+
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3(0, 0, 0)
+3d/default_linear_damp=0.0
+3d/default_angular_damp=0.0
