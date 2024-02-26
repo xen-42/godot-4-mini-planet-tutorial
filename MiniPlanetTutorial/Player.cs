@@ -19,6 +19,7 @@ public partial class Player : RigidBody3D
 
 	[Export] private float _thrust = 1f;
 	[Export] private float _autoOrientSpeed = 0.5f;
+	[Export] private float _jumpImpulse = 5f;
 
 	private bool _inMap;
 
@@ -91,11 +92,14 @@ public partial class Player : RigidBody3D
 		}
 		else
 		{
-			PhysicsMaterialOverride.Friction = 0f;
+			PhysicsMaterialOverride.Friction = 1f;
 			ApplyCentralForce(_thrust * movement.Normalized());
 		}
 
-
+		if (IsGrounded && Input.IsActionJustReleased("Jump"))
+		{
+			ApplyCentralImpulse(_jumpImpulse * up);
+		}
 	}
 
 	private void ProcessLookInputs(double delta)
@@ -123,9 +127,7 @@ public partial class Player : RigidBody3D
 	{
 		AngularVelocity = Vector3.Zero;
 
-
 		var inZeroG = _closestForce == Vector3.Zero;
-		inZeroG = true;
 
 		if (inZeroG)
 		{
@@ -134,7 +136,7 @@ public partial class Player : RigidBody3D
 			_cameraXRotation += dx;
 
 			_cameraPivot.RotateX(Mathf.DegToRad(-dx));
-			RotateX(Mathf.DegToRad(dx));
+			Rotate(_cameraPivot.GlobalTransform.Basis.X, Mathf.DegToRad(dx));
 		}
 		else
 		{
@@ -143,21 +145,17 @@ public partial class Player : RigidBody3D
 
 			if (IsGrounded)
 			{
-				GD.Print("Grounded!");
 				AngularVelocity = _ground.ConstantAngularVelocity.Project(upDirection);
 
 				GlobalRotation = orientationDirection.Normalized().GetEuler();
 			}
 			else
 			{
-				GD.Print("Not grounded!");
 				var rotation = GlobalTransform.Basis.GetRotationQuaternion().Slerp(orientationDirection.Normalized(), _autoOrientSpeed * (float)delta);
 
 				GlobalRotation = rotation.GetEuler();
 			}
 		}
-
-
 	}
 
 	public override void _Input(InputEvent e)
