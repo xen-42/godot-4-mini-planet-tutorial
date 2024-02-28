@@ -64,7 +64,7 @@ _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 150.0
 surfaceRadius = 20.0
 _surfaceGravity = 9.8
-_dayLength = 120.0
+_dayLength = 200.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Earth"]
 mesh = SubResource("SphereMesh_v6gf0")
@@ -95,7 +95,7 @@ _orbitalRadius = 300.0
 _orbitalAngle = 45.0
 surfaceRadius = 20.0
 _surfaceGravity = 5.0
-_dayLength = 34.0
+_dayLength = 340.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mars"]
 mesh = SubResource("SphereMesh_53bip")

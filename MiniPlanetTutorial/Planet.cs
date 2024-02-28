@@ -46,9 +46,9 @@ public partial class Planet : StaticBody3D
 	/// </summary>
 	public float GravitationalMass { get; private set; }
 
-	public const float GRAVITATIONAL_CONSTANT = 1f;
+	public const float GRAVITATIONAL_CONSTANT = 100000000000000f;
 
-	public Vector3 Force { get; private set; }
+	public Vector3 AccelerationByGravity { get; private set; }
 
 	public override void _Ready()
 	{
@@ -80,11 +80,11 @@ public partial class Planet : StaticBody3D
 	}
 
 	/// <summary>
-	/// Gets the force that this planet exerts at the point given
+	/// Gets the acceleration caused by the force that this planet exerts at the point given
 	/// </summary>
 	/// <param name="globalPosition"></param>
 	/// <returns></returns>
-	public Vector3 GetForceAtPosition(Vector3 globalPosition)
+	public Vector3 GetAccelerationAtPosition(Vector3 globalPosition)
 	{
 		var d = globalPosition - this.GlobalPosition;
 		return -d.Normalized() * GravitationalMass / d.LengthSquared();
@@ -117,8 +117,8 @@ public partial class Planet : StaticBody3D
 	{
 		if (_orbitalParent != null)
 		{
-			Force = _orbitalParent.GetForceAtPosition(GlobalPosition) + _orbitalParent.Force;
-			var acc = Force / GRAVITATIONAL_CONSTANT;
+			AccelerationByGravity = _orbitalParent.GetAccelerationAtPosition(GlobalPosition) + _orbitalParent.AccelerationByGravity;
+			var acc = AccelerationByGravity;
 			ConstantLinearVelocity += acc * (float)delta;
 			GlobalPosition += ConstantLinearVelocity * (float)delta;
 		}

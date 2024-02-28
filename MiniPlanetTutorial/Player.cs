@@ -46,7 +46,7 @@ public partial class Player : RigidBody3D
 		_closestForce = Vector3.Zero;
 		foreach (var planet in SolarSystem.Instance.planets)
 		{
-			var force = planet.GetForceAtPosition(GlobalPosition);
+			var force = planet.GetAccelerationAtPosition(GlobalPosition) * this.Mass;
 			ApplyCentralForce(force);
 
 			// If we're close to a planet we track which one is pulling on us the most to orient our feet towards it
@@ -88,7 +88,7 @@ public partial class Player : RigidBody3D
 
 		if (movement == Vector3.Zero)
 		{
-			PhysicsMaterialOverride.Friction = 5f;
+			PhysicsMaterialOverride.Friction = 50f;
 		}
 		else
 		{
