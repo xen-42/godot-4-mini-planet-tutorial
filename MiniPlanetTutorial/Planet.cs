@@ -46,8 +46,6 @@ public partial class Planet : StaticBody3D
 	/// </summary>
 	public float GravitationalMass { get; private set; }
 
-	public const float GRAVITATIONAL_CONSTANT = 100000000000000f;
-
 	public Vector3 AccelerationByGravity { get; private set; }
 
 	public override void _Ready()
