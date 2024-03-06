@@ -126,6 +126,7 @@ public partial class Player : RigidBody3D
 	private void ProcessAutoOrientation(double delta)
 	{
 		AngularVelocity = Vector3.Zero;
+		AngularDamp = 10;
 
 		var inZeroG = _closestForce == Vector3.Zero;
 
@@ -146,6 +147,7 @@ public partial class Player : RigidBody3D
 			if (IsGrounded)
 			{
 				AngularVelocity = _ground.ConstantAngularVelocity.Project(upDirection);
+				AngularDamp = 0;
 
 				GlobalRotation = orientationDirection.Normalized().GetEuler();
 			}
