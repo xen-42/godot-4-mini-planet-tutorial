@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bxjkkgh0jfjm"]
+[gd_scene load_steps=21 format=3 uid="uid://bxjkkgh0jfjm"]
 
 [ext_resource type="Texture2D" uid="uid://6eqctxd7t77y" path="res://moon_texturemap.png" id="1_7111j"]
 [ext_resource type="Script" path="res://SolarSystem.cs" id="1_s2k7g"]
 [ext_resource type="Texture2D" uid="uid://blkyamearklx8" path="res://mars_texturemap.png" id="2_iucsa"]
 [ext_resource type="Script" path="res://Planet.cs" id="2_ltn17"]
+[ext_resource type="Texture2D" uid="uid://bsdne7saqa4y7" path="res://ESO_-_Milky_Way.jpg" id="5_350u2"]
 [ext_resource type="PackedScene" uid="uid://dh7elcep04tt2" path="res://Player.tscn" id="5_jloqv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o3kyp"]
@@ -48,8 +49,16 @@ material = SubResource("StandardMaterial3D_6bpvc")
 radius = 50.0
 height = 100.0
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b15o2"]
+panorama = ExtResource("5_350u2")
+
+[sub_resource type="Sky" id="Sky_ygixq"]
+sky_material = SubResource("PanoramaSkyMaterial_b15o2")
+
 [sub_resource type="Environment" id="Environment_ocf52"]
-background_mode = 1
+background_mode = 2
+background_energy_multiplier = 0.14
+sky = SubResource("Sky_ygixq")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.01
