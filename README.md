@@ -4,6 +4,8 @@
 
 Project includes scripts for making a mini solar system with a physics-based player controller, inspired by the great game [Outer Wilds](https://www.mobiusdigitalgames.com/outer-wilds.html).
 
+All the planets use a two-body simulation, while the player character is n-body.
+
 ### Image credits
 
 Images used for the Earth, the Moon, and Mars were created by NASA.
