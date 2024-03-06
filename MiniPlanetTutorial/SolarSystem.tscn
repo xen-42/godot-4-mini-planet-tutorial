@@ -72,7 +72,7 @@ script = ExtResource("1_pn0ic")
 [node name="Earth" type="StaticBody3D" parent="." node_paths=PackedStringArray("_orbitalParent")]
 script = ExtResource("2_nclfi")
 _orbitalParent = NodePath("../Sun")
-_orbitalRadius = 150.0
+_orbitalRadius = 200.0
 surfaceRadius = 20.0
 _surfaceGravity = 9.8
 _dayLength = 200.0
@@ -102,7 +102,7 @@ shape = SubResource("SphereShape3D_i78ja")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -264.711)
 script = ExtResource("2_nclfi")
 _orbitalParent = NodePath("../Sun")
-_orbitalRadius = 300.0
+_orbitalRadius = 350.0
 _orbitalAngle = 45.0
 surfaceRadius = 20.0
 _surfaceGravity = 5.0

@@ -115,6 +115,21 @@ public partial class Planet : StaticBody3D
 		return 2f * Mathf.Pi * Mathf.Sqrt(Mathf.Pow(_orbitalRadius, 3) / _orbitalParent.GravitationalMass);
 	}
 
+	/// <summary>
+	/// Gives how quickly a body is moving relative to the surface of this planet at a given position and with a given velocity
+	/// </summary>
+	/// <param name="globalPosition"></param>
+	/// <param name="linearVelocity"></param>
+	/// <returns></returns>
+	public Vector3 GetRelativeVelocityToSurface(Vector3 globalPosition, Vector3 linearVelocity)
+	{
+		var planetSpeed = ConstantLinearVelocity;
+		var rotationalSpeed = ConstantAngularVelocity.Cross(globalPosition - GlobalPosition);
+		var relativeSpeed = linearVelocity - (planetSpeed + rotationalSpeed);
+
+		return relativeSpeed;
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (_orbitalParent != null)

@@ -12,6 +12,9 @@ public partial class Player : RigidBody3D
 	private Planet _ground => _groundCast.GetCollider() as Planet;
 	private Vector3 _closestForce;
 
+	private Vector3 _surfacePosition;
+	private bool _isStuckToSurface;
+
 	[ExportCategory("Settings")]
 	[Export] private float _mouseSensitivity = 0.3f;
 	private Vector2 _mouseDelta;
@@ -86,13 +89,31 @@ public partial class Player : RigidBody3D
 		if (Input.IsActionPressed("Up")) movement += up;
 		if (Input.IsActionPressed("Down")) movement -= up;
 
-		if (movement == Vector3.Zero)
+		// With all the physics calculations going on, the player can sometimes start drifting when standing still on the surface of a planet
+		// If they aren't trying to move and aren't sliding on the ground, we'll fix them in place
+		var shouldStickToSurface = movement == Vector3.Zero && _ground != null && _ground.GetRelativeVelocityToSurface(GlobalPosition, LinearVelocity).Length() < 0.2f;
+
+		if (shouldStickToSurface)
 		{
-			PhysicsMaterialOverride.Friction = 50f;
+			if (_isStuckToSurface)
+			{
+				// Keep the player at the current local position
+				GlobalPosition = _ground.ToGlobal(_surfacePosition);
+			}
+			else
+			{
+				// Record the current local position to stick to it
+				_surfacePosition = _ground.ToLocal(GlobalPosition);
+				_isStuckToSurface = true;
+			}
 		}
 		else
 		{
-			PhysicsMaterialOverride.Friction = 1f;
+			_isStuckToSurface = false;
+		}
+
+		if (movement != Vector3.Zero)
+		{
 			ApplyCentralForce(_thrust * movement.Normalized());
 		}
 
