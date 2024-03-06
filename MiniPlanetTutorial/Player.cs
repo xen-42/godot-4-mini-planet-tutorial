@@ -44,7 +44,7 @@ public partial class Player : RigidBody3D
 	{
 		var closestForceMagnitude = 0f;
 		_closestForce = Vector3.Zero;
-		foreach (var planet in SolarSystem.Instance.planets)
+		foreach (var planet in SolarSystem.Instance.Planets)
 		{
 			var force = planet.GetAccelerationAtPosition(GlobalPosition) * this.Mass;
 			ApplyCentralForce(force);

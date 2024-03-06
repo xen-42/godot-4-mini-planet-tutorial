@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MiniPlanetTutorial"
-run/main_scene="res://Level.tscn"
+run/main_scene="res://SolarSystem.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

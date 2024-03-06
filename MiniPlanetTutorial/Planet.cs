@@ -50,15 +50,19 @@ public partial class Planet : StaticBody3D
 
 	public override void _Ready()
 	{
-		//Fg = (G m1 m2)/d^2
-		//Fg = m1 a
-		//m1 a = (G m1 m2)/d^2
+		// Fg = (G m1 m2)/d^2
+		// Fg = m1 a
+		// m1 a = (G m1 m2)/d^2
 		// a = G m2 / d^2
 		// _surfaceGravity = G m2 / _surfaceRadius^2
 		// G m2 = _surfaceGravity * _surfaceRadius^2
 		GravitationalMass = _surfaceGravity * surfaceRadius * surfaceRadius;
 	}
 
+	/// <summary>
+	/// Called after all planets are Ready
+	/// Init must be called on the orbitalParent of a planet first
+	/// </summary>
 	public void Init()
 	{
 		if (_orbitalParent != null )
@@ -124,6 +128,15 @@ public partial class Planet : StaticBody3D
 		GlobalRotation += ConstantAngularVelocity * (float)delta;
 	}
 
+	/// <summary>
+	/// Used to order planets depending on where they are in the hierarchy.
+	/// Ex)
+	/// Sun   - 0 parents
+	/// Earth - 1 parent  (Sun)
+	/// Mars  - 1 parent  (Sun)
+	/// Moon  - 2 parents (Earth -> Sun)
+	/// </summary>
+	/// <returns></returns>
 	public int HowManyParents()
 	{
 		if (_orbitalParent == null)

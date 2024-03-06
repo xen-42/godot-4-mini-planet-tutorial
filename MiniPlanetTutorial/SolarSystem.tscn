@@ -1,11 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://bxjkkgh0jfjm"]
+[gd_scene load_steps=22 format=3 uid="uid://bxjkkgh0jfjm"]
 
-[ext_resource type="Texture2D" uid="uid://6eqctxd7t77y" path="res://moon_texturemap.png" id="1_7111j"]
-[ext_resource type="Script" path="res://SolarSystem.cs" id="1_s2k7g"]
-[ext_resource type="Texture2D" uid="uid://blkyamearklx8" path="res://mars_texturemap.png" id="2_iucsa"]
-[ext_resource type="Script" path="res://Planet.cs" id="2_ltn17"]
-[ext_resource type="Texture2D" uid="uid://bsdne7saqa4y7" path="res://ESO_-_Milky_Way.jpg" id="5_350u2"]
-[ext_resource type="PackedScene" uid="uid://dh7elcep04tt2" path="res://Player.tscn" id="5_jloqv"]
+[ext_resource type="Script" path="res://SolarSystem.cs" id="1_pn0ic"]
+[ext_resource type="Script" path="res://Planet.cs" id="2_nclfi"]
+[ext_resource type="Texture2D" uid="uid://6eqctxd7t77y" path="res://moon_texturemap.png" id="3_lqdmi"]
+[ext_resource type="Texture2D" uid="uid://blkyamearklx8" path="res://mars_texturemap.png" id="4_r6b8d"]
+[ext_resource type="Texture2D" uid="uid://bsdne7saqa4y7" path="res://ESO_-_Milky_Way.jpg" id="5_rwgkv"]
+[ext_resource type="PackedScene" uid="uid://dh7elcep04tt2" path="res://Player.tscn" id="6_wutj3"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o3kyp"]
 load_path = "res://.godot/imported/earth_texturemap.png-44547dae1d3f4c0d309b13b6a5240d82.s3tc.ctex"
@@ -22,7 +22,7 @@ height = 40.0
 radius = 20.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhtdl"]
-albedo_texture = ExtResource("1_7111j")
+albedo_texture = ExtResource("3_lqdmi")
 
 [sub_resource type="SphereMesh" id="SphereMesh_wqjic"]
 material = SubResource("StandardMaterial3D_yhtdl")
@@ -33,7 +33,7 @@ height = 20.0
 radius = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6ry8"]
-albedo_texture = ExtResource("2_iucsa")
+albedo_texture = ExtResource("4_r6b8d")
 
 [sub_resource type="SphereMesh" id="SphereMesh_53bip"]
 material = SubResource("StandardMaterial3D_r6ry8")
@@ -49,8 +49,11 @@ material = SubResource("StandardMaterial3D_6bpvc")
 radius = 50.0
 height = 100.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_hrc11"]
+radius = 50.0
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b15o2"]
-panorama = ExtResource("5_350u2")
+panorama = ExtResource("5_rwgkv")
 
 [sub_resource type="Sky" id="Sky_ygixq"]
 sky_material = SubResource("PanoramaSkyMaterial_b15o2")
@@ -63,12 +66,11 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.01
 
-[node name="SolarSystem" type="Node3D" node_paths=PackedStringArray("planets")]
-script = ExtResource("1_s2k7g")
-planets = [NodePath("Earth"), NodePath("Mars"), NodePath("Sun"), NodePath("Moon")]
+[node name="SolarSystem" type="Node3D"]
+script = ExtResource("1_pn0ic")
 
 [node name="Earth" type="StaticBody3D" parent="." node_paths=PackedStringArray("_orbitalParent")]
-script = ExtResource("2_ltn17")
+script = ExtResource("2_nclfi")
 _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 150.0
 surfaceRadius = 20.0
@@ -83,7 +85,7 @@ shape = SubResource("SphereShape3D_btiol")
 
 [node name="Moon" type="StaticBody3D" parent="." node_paths=PackedStringArray("_orbitalParent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9029, 0, 0)
-script = ExtResource("2_ltn17")
+script = ExtResource("2_nclfi")
 _orbitalParent = NodePath("../Earth")
 _orbitalRadius = 70.0
 surfaceRadius = 10.0
@@ -98,7 +100,7 @@ shape = SubResource("SphereShape3D_i78ja")
 
 [node name="Mars" type="StaticBody3D" parent="." node_paths=PackedStringArray("_orbitalParent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -264.711)
-script = ExtResource("2_ltn17")
+script = ExtResource("2_nclfi")
 _orbitalParent = NodePath("../Sun")
 _orbitalRadius = 300.0
 _orbitalAngle = 45.0
@@ -114,7 +116,7 @@ shape = SubResource("SphereShape3D_btiol")
 
 [node name="Sun" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 170.046)
-script = ExtResource("2_ltn17")
+script = ExtResource("2_nclfi")
 surfaceRadius = 50.0
 _surfaceGravity = 20.0
 
@@ -130,8 +132,11 @@ omni_range = 500.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 500, 0)
 far = 40000.0
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sun"]
+shape = SubResource("SphereShape3D_hrc11")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ocf52")
 
-[node name="Player" parent="." instance=ExtResource("5_jloqv")]
+[node name="Player" parent="." instance=ExtResource("6_wutj3")]
 _autoOrientSpeed = 2.0
