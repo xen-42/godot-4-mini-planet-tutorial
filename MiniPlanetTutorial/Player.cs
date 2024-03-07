@@ -59,6 +59,7 @@ public partial class Player : RigidBody3D
 				if (magnitude > closestForceMagnitude) 
 				{
 					_closestForce = force;
+					closestForceMagnitude = magnitude;
 				}
 			}
 		}
