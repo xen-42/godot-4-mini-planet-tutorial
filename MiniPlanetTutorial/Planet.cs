@@ -44,7 +44,7 @@ public partial class Planet : StaticBody3D
 	/// <summary>
 	/// Equal to GM
 	/// </summary>
-	public float GravitationalMass { get; private set; }
+	public float StandardGravitationalParameter { get; private set; }
 
 	public Vector3 AccelerationByGravity { get; private set; }
 
@@ -56,7 +56,7 @@ public partial class Planet : StaticBody3D
 		// a = G m2 / d^2
 		// _surfaceGravity = G m2 / _surfaceRadius^2
 		// G m2 = _surfaceGravity * _surfaceRadius^2
-		GravitationalMass = _surfaceGravity * surfaceRadius * surfaceRadius;
+		StandardGravitationalParameter = _surfaceGravity * surfaceRadius * surfaceRadius;
 	}
 
 	/// <summary>
@@ -89,7 +89,7 @@ public partial class Planet : StaticBody3D
 	public Vector3 GetAccelerationAtPosition(Vector3 globalPosition)
 	{
 		var d = globalPosition - this.GlobalPosition;
-		return -d.Normalized() * GravitationalMass / d.LengthSquared();
+		return -d.Normalized() * StandardGravitationalParameter / d.LengthSquared();
 	}
 
 	/// <summary>
@@ -100,7 +100,7 @@ public partial class Planet : StaticBody3D
 	public Vector3 GetOrbitalVelocity(Vector3 globalPosition)
 	{
 		var d = globalPosition - this.GlobalPosition;
-		var speed = Mathf.Sqrt(GravitationalMass / d.Length());
+		var speed = Mathf.Sqrt(StandardGravitationalParameter / d.Length());
 		var direction = d.Normalized().Cross(Vector3.Up);
 		
 		return direction * speed;
@@ -112,7 +112,7 @@ public partial class Planet : StaticBody3D
 	/// <returns></returns>
 	public float GetOrbitalPeriod()
 	{
-		return 2f * Mathf.Pi * Mathf.Sqrt(Mathf.Pow(_orbitalRadius, 3) / _orbitalParent.GravitationalMass);
+		return 2f * Mathf.Pi * Mathf.Sqrt(Mathf.Pow(_orbitalRadius, 3) / _orbitalParent.StandardGravitationalParameter);
 	}
 
 	/// <summary>
